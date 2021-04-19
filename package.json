@@ -1,0 +1,27 @@
+{
+  "name": "mpc-bindings",
+  "version": "0.4.2",
+  "description": "Threshold signatures based on two-party ECDSA",
+  "main": "./lib/index.js",
+  "repository": "https://github.com/KZen-networks/thresh-sig.git",
+  "author": "Oded Leiba <oded@kzencorp.com>",
+  "license": "GPL-3.0",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build-rust": "neon build --release",
+    "build-ts": "tsc",
+    "build": "npm run build-rust && npm run build-ts",
+    "test": "mocha",
+    "prepublishOnly": "npm run build && npm test",
+    "postinstall": "npm run build-rust && mv native/index.node native/index && mkdir native/index.node && mv native/index native/index.node/index"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "neon-cli": "^0.6.0",
+    "neon-load-or-build": "2.2.2"
+  },
+  "engines": {
+    "node": "^10.20.1",
+    "npm": "^6.9.0"
+  }
+}
